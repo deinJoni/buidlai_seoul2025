@@ -1,0 +1,1 @@
+For Netlify deployment, I need an API token, and I also need an Enterprise Plan.

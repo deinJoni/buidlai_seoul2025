@@ -1,8 +1,8 @@
 
-import { Mastra } from '@mastra/core/mastra';
 import { createLogger } from '@mastra/core/logger';
-import { weatherWorkflow } from './workflows';
+import { Mastra } from '@mastra/core/mastra';
 import { aiAssistantAgent, pinaiAgent } from './agents';
+import { weatherWorkflow } from './workflows';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
