@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 
+
+const API_URL = 'https://mastra-buidlseoul25-production.up.railway.app/api'
+
 function App() {
   const [query, setQuery] = useState('')
   const [answer, setAnswer] = useState('')
