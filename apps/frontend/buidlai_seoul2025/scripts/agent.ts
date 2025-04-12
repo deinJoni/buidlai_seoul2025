@@ -9,7 +9,8 @@ const client = new MastraClient({
 // Example: Working with an Agent
 async function main() {
     // Get an agent instance
-    const agent = client.getAgent('pinaiAgent');
+    const agent = client.getAgent('aiAssistantAgent');
+    // const agent = client.getAgent('pinaiAgent');
 
     // Generate a response
     const response = await agent.generate({

@@ -85,6 +85,109 @@ h1 {
   color: #495057;
 }
 
+/* Chat container */
+.chat-container {
+  width: 100%;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Welcome message */
+.welcome-message {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem;
+}
+
+.welcome-message h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+/* Message styles */
+.message {
+  max-width: 85%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-message {
+  align-self: flex-end;
+  background-color: #646cff;
+  color: white;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.assistant-message {
+  align-self: flex-start;
+  background-color: #f0f0f0;
+  color: #212529;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.message-sender {
+  font-weight: bold;
+}
+
+.message-time {
+  opacity: 0.8;
+}
+
+.message-content {
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  position: relative;
+}
+
+.typing-indicator::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #646cff;
+  opacity: 0.6;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.5); opacity: 0.2; }
+  50% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(0.5); opacity: 0.2; }
+}
+
 /* Search container */
 .search-container {
   display: flex;
@@ -111,6 +214,11 @@ h1 {
 .search-input:focus {
   border-color: #646cff;
   box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.2);
+}
+
+.search-input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
 }
 
 .button-row {
@@ -166,7 +274,7 @@ h1 {
 }
 
 .loading {
-  margin: 2rem 0;
+  margin: 1rem 0;
   font-style: italic;
   color: #666;
 }
