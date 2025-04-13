@@ -24,6 +24,8 @@ Our platform consists of several integrated components:
 4. **Hyperbolic Engine**: Personalizes responses based on user expertise
 5. **SAGA Chainlet**: Stores historical queries on-chain as an immutable registry
 
+<img width="881" alt="SCR-20250413-jayz" src="https://github.com/user-attachments/assets/4b7e808a-5064-4887-a5e5-f09804a334cb" />
+
 ## Technology Stack
 
 - **Frontend**:
@@ -82,32 +84,5 @@ cp .env.example .env
 # Start the development server
 pnpm dev
 ```
-
-## Demo
-
-Check out our live demo: [BuidlAI Demo](https://buidlai-demo.app)
-
-## Team
-
-Our diverse team brings together expertise in AI, blockchain, and full-stack development:
-
-- Team Member 1 - AI Specialist
-- Team Member 2 - Blockchain Engineer
-- Team Member 3 - Frontend Developer
-- Team Member 4 - Data Scientist
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Future Roadmap
-
-- Enhanced personalization profiles
-- Support for additional blockchains
-- Integration with other data sources
-- Advanced visualization tools
-- Mobile application
-
----
 
 Built with at Seoul Hackathon 2025
