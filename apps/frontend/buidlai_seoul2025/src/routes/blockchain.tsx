@@ -102,64 +102,66 @@ function BlockchainPage() {
   const typedQueryData = isValidQueryData(queryData) ? queryData : null;
 
   return (
-    <div className="container">
-      <h1>Blockchain Integration</h1>
+    <div className="w-full max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold text-blue-800 mb-6">Blockchain Integration</h1>
       
       {ownerData && (
-        <div className="contract-info">
+        <div className="p-3 bg-blue-50 rounded-lg text-sm text-blue-800 mb-6">
           <p>Contract Owner: {typeof ownerData === 'string' ? ownerData : String(ownerData)}</p>
         </div>
       )}
       
-      <div className="blockchain-section">
-        <h2>Submit Query to Blockchain</h2>
-        <p>This feature allows you to permanently store your research queries on the SAGA Chainlet.</p>
+      <div className="mb-10 p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Submit Query to Blockchain</h2>
+        <p className="text-gray-600 mb-6">This feature allows you to permanently store your research queries on the SAGA Chainlet.</p>
         
-        <div className="search-container">
-          <div className="input-row">
+        <div className="space-y-4">
+          <div>
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Enter your query to store on blockchain..."
-              className="search-input"
+              className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
               disabled={loading || !isConnected}
             />
           </div>
           
-          <div className="button-row">
+          <div className="flex justify-center">
             {isConnected ? (
               <button 
                 onClick={handleSubmitToBlockchain}
                 disabled={loading || !query.trim() || isPending}
-                className="blockchain-button"
+                className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors disabled:bg-indigo-300 disabled:cursor-not-allowed"
               >
                 {isPending ? 'Submitting...' : 'Submit to Blockchain'}
               </button>
             ) : (
-              <p className="connect-wallet-prompt">Connect your wallet to submit queries to the blockchain</p>
+              <p className="text-gray-500 italic text-center">Connect your wallet to submit queries to the blockchain</p>
             )}
           </div>
         </div>
         
-        {loading && <div className="loading">Processing your request...</div>}
+        {loading && (
+          <div className="mt-4 text-center italic text-gray-500">Processing your request...</div>
+        )}
         
         {answer && (
-          <div className="answer-container">
-            <h3>Transaction Status:</h3>
-            <p className="answer">{answer}</p>
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h3 className="text-lg font-semibold text-blue-800 mb-2">Transaction Status:</h3>
+            <p className="text-gray-700">{answer}</p>
           </div>
         )}
       </div>
       
-      <div className="query-explorer">
-        <h2>Query Explorer</h2>
-        <p>View previously submitted queries</p>
+      <div className="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Query Explorer</h2>
+        <p className="text-gray-600 mb-6">View previously submitted queries</p>
         
-        <div className="query-selector">
+        <div className="flex justify-center mb-6">
           <button 
             onClick={() => setSelectedQueryId(selectedQueryId === null ? 0 : null)}
-            className="selector-button"
+            className="px-5 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors"
           >
             {selectedQueryId === null ? 'View Latest Query' : 'Hide Query Details'}
           </button>
@@ -167,18 +169,18 @@ function BlockchainPage() {
           {/* Additional query navigation buttons could be added here */}
           
           {selectedQueryId !== null && (
-            <div className="query-id-selector">
+            <div className="flex items-center gap-4 mt-4">
               <button 
                 onClick={() => setSelectedQueryId(prev => prev !== null && prev > 0 ? prev - 1 : 0)}
                 disabled={selectedQueryId === 0}
-                className="nav-button"
+                className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 Previous
               </button>
-              <span>Query #{selectedQueryId}</span>
+              <span className="font-medium text-gray-700">Query #{selectedQueryId}</span>
               <button 
                 onClick={() => setSelectedQueryId(prev => prev !== null ? prev + 1 : 0)}
-                className="nav-button"
+                className="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
               >
                 Next
               </button>
@@ -187,13 +189,13 @@ function BlockchainPage() {
         </div>
         
         {selectedQueryId !== null && typedQueryData && (
-          <div className="query-details">
-            <h3>Query Details (ID: {selectedQueryId})</h3>
-            <div className="query-info">
-              <p><strong>User:</strong> {typedQueryData.user}</p>
-              <p><strong>Query Text:</strong> {typedQueryData.queryText}</p>
-              <p><strong>State:</strong> {typedQueryData.state}</p>
-              <p><strong>Run ID:</strong> {typedQueryData.runId.toString()}</p>
+          <div className="p-5 bg-gray-50 rounded-lg border border-gray-200">
+            <h3 className="text-lg font-semibold text-blue-800 mb-4">Query Details (ID: {selectedQueryId})</h3>
+            <div className="space-y-2 text-gray-700">
+              <p><span className="font-semibold">User:</span> {typedQueryData.user}</p>
+              <p><span className="font-semibold">Query Text:</span> {typedQueryData.queryText}</p>
+              <p><span className="font-semibold">State:</span> {typedQueryData.state}</p>
+              <p><span className="font-semibold">Run ID:</span> {typedQueryData.runId.toString()}</p>
             </div>
           </div>
         )}

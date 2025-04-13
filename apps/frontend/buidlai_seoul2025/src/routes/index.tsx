@@ -129,29 +129,36 @@ function HomePage() {
   };
 
   return (
-    <div className="container">
-      <h1>Research Assistant</h1>
+    <div className="w-full max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold text-blue-800 mb-6">Research Assistant</h1>
       
       {/* Chat container */}
-      <div className="chat-container" ref={chatContainerRef}>
+      <div 
+        ref={chatContainerRef} 
+        className="w-full h-96 overflow-y-auto border border-gray-200 rounded-lg p-4 bg-gray-50 mb-6 shadow-inner"
+      >
         {chatHistory.length === 0 ? (
-          <div className="welcome-message">
-            <h3>Welcome to Research Assistant!</h3>
-            <p>Ask me any research question and I'll help you find the answer.</p>
+          <div className="flex flex-col items-center justify-center h-full text-center p-6">
+            <h3 className="text-xl font-semibold text-blue-800 mb-2">Welcome to Research Assistant!</h3>
+            <p className="text-gray-600">Ask me any research question and I'll help you find the answer.</p>
           </div>
         ) : (
           chatHistory.map((message, index) => (
             <div 
               key={index} 
-              className={`message ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}
+              className={`mb-4 p-3 rounded-lg max-w-[85%] ${
+                message.role === 'user' 
+                  ? 'ml-auto bg-blue-100 text-right' 
+                  : 'mr-auto bg-white border border-gray-200'
+              }`}
             >
-              <div className="message-header">
-                <span className="message-sender">
+              <div className="flex justify-between items-center mb-1 text-xs text-gray-500">
+                <span className="font-semibold">
                   {message.role === 'user' ? 'You' : 'Assistant'}
                 </span>
-                <span className="message-time">{formatTimestamp()}</span>
+                <span>{formatTimestamp()}</span>
               </div>
-              <div className="message-content">
+              <div className="text-sm break-words">
                 {message.content}
               </div>
             </div>
@@ -160,49 +167,51 @@ function HomePage() {
         
         {/* Show streaming response */}
         {isStreaming && (
-          <div className="message assistant-message">
-            <div className="message-header">
-              <span className="message-sender">Assistant</span>
-              <span className="message-time">{formatTimestamp()}</span>
+          <div className="mb-4 p-3 rounded-lg max-w-[85%] mr-auto bg-white border border-gray-200">
+            <div className="flex justify-between items-center mb-1 text-xs text-gray-500">
+              <span className="font-semibold">Assistant</span>
+              <span>{formatTimestamp()}</span>
             </div>
-            <div className="message-content">
+            <div className="text-sm break-words">
               {streamingAnswer}
-              <span className="typing-indicator"></span>
+              <span className="inline-block w-2 h-2 bg-blue-500 rounded-full ml-1 animate-pulse"></span>
             </div>
           </div>
         )}
       </div>
       
-      <div className="search-container">
-        <div className="input-row">
+      <div className="w-full mt-6">
+        <div className="mb-4">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ask a research question..."
-            className="search-input"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             disabled={loading || isStreaming}
           />
         </div>
         
-        <div className="button-row">
+        <div className="flex justify-center">
           <button 
             onClick={handleSearch}
             disabled={loading || !query.trim() || isStreaming}
-            className="search-button"
+            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed"
           >
             {loading ? 'Searching...' : 'Search'}
           </button>
         </div>
       </div>
       
-      {loading && <div className="loading">Processing your request...</div>}
+      {loading && (
+        <div className="mt-4 text-center italic text-gray-500">Processing your request...</div>
+      )}
       
       {answer && (
-        <div className="answer-container">
-          <h2>Answer:</h2>
-          <p className="answer">{answer}</p>
+        <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <h2 className="text-xl font-semibold text-blue-800 mb-2">Answer:</h2>
+          <p className="text-gray-700">{answer}</p>
         </div>
       )}
     </div>

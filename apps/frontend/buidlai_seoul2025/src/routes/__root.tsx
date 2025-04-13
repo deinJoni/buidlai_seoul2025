@@ -5,7 +5,6 @@ import { WagmiProvider } from 'wagmi'
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { http } from 'wagmi'
 import { sagaChainlet } from '../config/chain'
-import './styles.css'
 import '@rainbow-me/rainbowkit/styles.css'
 
 // Configure wagmi and rainbowkit
@@ -28,23 +27,29 @@ export const Route = createRootRoute({
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <div className="app-layout">
-            <header className="app-header">
-              <div className="nav-container">
-                <nav className="main-nav">
-                  <Link to="/" className="nav-link [&.active]:font-bold">
+          <div className="flex flex-col min-h-screen w-full">
+            <header className="sticky top-0 bg-white border-b border-gray-200 z-10 w-full px-6 py-4 shadow-sm">
+              <div className="max-w-7xl mx-auto flex justify-between items-center">
+                <nav className="flex gap-6">
+                  <Link 
+                    to="/" 
+                    className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md transition-colors [&.active]:text-blue-600 [&.active]:font-semibold"
+                  >
                     Home
                   </Link>
-                  <Link to="/blockchain" className="nav-link [&.active]:font-bold">
+                  <Link 
+                    to="/blockchain" 
+                    className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md transition-colors [&.active]:text-blue-600 [&.active]:font-semibold"
+                  >
                     Blockchain
                   </Link>
                 </nav>
-                <div className="wallet-connect">
+                <div>
                   <ConnectButton />
                 </div>
               </div>
             </header>
-            <main className="app-main">
+            <main className="flex-grow p-6 max-w-7xl mx-auto w-full">
               <Outlet />
             </main>
             <TanStackRouterDevtools />
