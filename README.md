@@ -1,6 +1,6 @@
-# BuidlAI Seoul 2025
+![image](https://github.com/user-attachments/assets/77e035ea-c090-4ebd-8079-fac74f68ceb9)
 
-![BuidlAI Seoul 2025 Logo](https://via.placeholder.com/800x200?text=BuidlAI+Seoul+2025)
+# BuidlAI Seoul 2025
 
 ## Overview
 
