@@ -11,10 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NearImport } from './routes/near'
 import { Route as BlockchainImport } from './routes/blockchain'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const NearRoute = NearImport.update({
+  id: '/near',
+  path: '/near',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const BlockchainRoute = BlockchainImport.update({
   id: '/blockchain',
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlockchainImport
       parentRoute: typeof rootRoute
     }
+    '/near': {
+      id: '/near'
+      path: '/near'
+      fullPath: '/near'
+      preLoaderRoute: typeof NearImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +68,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blockchain': typeof BlockchainRoute
+  '/near': typeof NearRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blockchain': typeof BlockchainRoute
+  '/near': typeof NearRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/blockchain': typeof BlockchainRoute
+  '/near': typeof NearRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blockchain'
+  fullPaths: '/' | '/blockchain' | '/near'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blockchain'
-  id: '__root__' | '/' | '/blockchain'
+  to: '/' | '/blockchain' | '/near'
+  id: '__root__' | '/' | '/blockchain' | '/near'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlockchainRoute: typeof BlockchainRoute
+  NearRoute: typeof NearRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlockchainRoute: BlockchainRoute,
+  NearRoute: NearRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +116,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/blockchain"
+        "/blockchain",
+        "/near"
       ]
     },
     "/": {
@@ -105,6 +125,9 @@ export const routeTree = rootRoute
     },
     "/blockchain": {
       "filePath": "blockchain.tsx"
+    },
+    "/near": {
+      "filePath": "near.tsx"
     }
   }
 }

@@ -43,6 +43,12 @@ export const Route = createRootRoute({
                   >
                     Blockchain
                   </Link>
+                  <Link 
+                    to="/near" 
+                    className="text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-md transition-colors [&.active]:text-blue-600 [&.active]:font-semibold"
+                  >
+                    Query Wizard
+                  </Link>
                 </nav>
                 <div>
                   <ConnectButton />
